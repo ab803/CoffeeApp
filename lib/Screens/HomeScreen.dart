@@ -22,7 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
     {"imgPath": "assets/images/Macchiato.jpeg", "title": "Macchiato", "subtitle": "Espresso & Foam", "price": "4.29", "category": "Macchiato"},
   ];
 
-  // 🔹 Filtered Items Based on Category Selection
   List<Map<String, String>> get filteredItems {
     if (selectedIndex == 0) return coffeeItems;
     return coffeeItems.where((item) => item["title"] == categories[selectedIndex]).toList();
@@ -34,71 +33,72 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavBar(),
       backgroundColor: Color(0xffEDD6C8),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                header(),
-                CustomeOfferImages(),
-              ],
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  header(),
+                  CustomeOfferImages(),
+                ],
+              ),
             ),
-            SizedBox(height: 80),
+            SliverToBoxAdapter(child: SizedBox(height: 80)),
 
-            // 🔹 Category Selector
-            SizedBox(
-              height: 50,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: categories.length,
-                  itemBuilder: (context, index) {
-                    bool isSelected = selectedIndex == index;
-
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            color: isSelected ? Color(0xFFC67C4E) : Color(0xffF9F2ED),
-                          ),
-                          child: Text(
-                            categories[index],
-                            style: TextStyle(
-                              color: isSelected ? Color(0xffF9F2ED) : Color(0xff313131),
-                              fontSize: 14,
+            // Category Selector
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 50,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) {
+                      bool isSelected = selectedIndex == index;
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: isSelected ? Color(0xFFC67C4E) : Color(0xffF9F2ED),
+                            ),
+                            child: Text(
+                              categories[index],
+                              style: TextStyle(
+                                color: isSelected ? Color(0xffF9F2ED) : Color(0xff313131),
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
 
-            // 🔹 Coffee Grid View
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemCount: filteredItems.length,
-                  itemBuilder: (context, index) {
+            // Coffee Grid View
+            SliverPadding(
+              padding: EdgeInsets.all(10),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 20,
+                  childAspectRatio: 0.75,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                      (context, index) {
                     return ItemCard(
                       imgPath: filteredItems[index]["imgPath"]!,
                       title: filteredItems[index]["title"]!,
@@ -106,6 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       price: filteredItems[index]["price"]!,
                     );
                   },
+                  childCount: filteredItems.length,
                 ),
               ),
             ),
