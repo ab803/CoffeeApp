@@ -25,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xffE3E3E3),
         elevation: 0,
         showSelectedLabels: false,
         showUnselectedLabels: false,
