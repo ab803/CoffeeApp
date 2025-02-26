@@ -25,13 +25,9 @@ class header extends StatelessWidget{
                   fontSize: 13,
                 ),
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.asset(
-                  "assets/images/1726837197476.jpg",
-                  width: 30,
-                  height: 30,
-                ),
+              CircleAvatar(
+                radius: 15, // Half of width & height
+                backgroundImage: AssetImage("assets/images/1726837197476.jpg"),
               ),
             ],
           ),
@@ -42,7 +38,7 @@ class header extends StatelessWidget{
           Row(
             children: [
               Text(
-                "Bilzen, Tanjungalai",
+                "Cairo, Egypt",
                 style: TextStyle(color: Color(0xffF9F2ED)),
               ),
               SizedBox(width: 5), // Spacing
@@ -86,10 +82,15 @@ class header extends StatelessWidget{
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Image.asset(
-                      "assets/images/page_info_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png",
-                      width:20,
-                      height: 20,
+                    child: GestureDetector(
+                      onTap: (){
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      child: Image.asset(
+                        "assets/images/page_info_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.png",
+                        width:20,
+                        height: 20,
+                      ),
                     ),
                   )
               ),

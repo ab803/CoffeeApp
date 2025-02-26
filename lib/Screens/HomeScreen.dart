@@ -54,6 +54,40 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: Drawer(
+        width: 180,
+        backgroundColor:  Color(0xFFC67C4E),
+        child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.only(top: 50, bottom: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+            ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 21,top: 35),
+                child: CircleAvatar(
+                radius: 15, // Half of width & height
+                backgroundImage: AssetImage("assets/images/1726837197476.jpg")
+                ,),
+              ),
+                SizedBox(height: 20),
+                _buildDrawerItem(Icons.home, "Home",color: Color(0xff313131)),
+                _buildDrawerItem(Icons.shopping_cart, "Cart",color: Color(0xff313131)),
+                _buildDrawerItem(Icons.favorite, "Favorites",color: Color(0xff313131)),
+                _buildDrawerItem(Icons.settings, "Settings",color: Color(0xff313131)),
+                Divider(color: Color(0xff313131), thickness: 1, indent: 20, endIndent: 20),
+                _buildDrawerItem(Icons.logout, "Logout", color: Color(0xff313131)),
+
+              ],
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: BottomNavBar(cartItems: cart,),
       backgroundColor: Color(0xffEDD6C8),
       body: SafeArea(
@@ -141,5 +175,22 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+
+Widget _buildDrawerItem(IconData icon, String title, {Color ?color}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+    child: Row(
+      children: [
+        Icon(icon, color: color, size: 24),
+        SizedBox(width: 15),
+        Text(
+          title,
+          style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+      ],
+    ),
+  );
 }
 
