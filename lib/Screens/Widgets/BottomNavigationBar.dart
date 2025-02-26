@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:task2/Screens/Cart.dart';
 
 class BottomNavBar extends StatefulWidget {
+  final List<Map<String, dynamic>> cartItems;
+
+  const BottomNavBar({super.key, required this.cartItems});
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
@@ -27,8 +31,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         onTap: _onItemTapped,
         backgroundColor: Color(0xffE3E3E3),
         elevation: 0,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         selectedItemColor: Color(0xFFC67C4E), // Brown active color
         unselectedItemColor: Color(0xffE3E3E3), // Gray inactive color
         items: [
@@ -55,7 +59,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Favorites',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined, size: 30),
+            icon: GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Cart(cartItems: widget.cartItems,)),
+                  );                },
+                child: Icon(Icons.shopping_bag_outlined, size: 30)),
             label: 'Cart',
           ),
           BottomNavigationBarItem(
