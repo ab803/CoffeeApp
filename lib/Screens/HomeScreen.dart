@@ -40,12 +40,16 @@ class _HomeScreenState extends State<HomeScreen> {
       } else {
         cart.add({...item, 'quantity': 1}); // Store as int
       }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          closeIconColor: Color(0xFFC67C4E),
+          backgroundColor: Color(0xff313131),
+          content: Text("Item added to cart"),
+          duration: Duration(seconds: 2), // Controls how long it stays visible
+        ),
+      );
     });
   }
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +69,47 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: 80)),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 50, // Adjust height as needed
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: categories.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index; // Update selected category index
+                          });
+                        },
+                        child: Container(
+                          height: 10,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: selectedIndex == index ? Color(0xFFC67C4E) : Color(0xffF9F2ED), // Change color on selection
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              categories[index],
+                              style: TextStyle(
+                                color: selectedIndex == index ? Color(0xffF9F2ED) : Color(0xff313131),
+                                fontWeight: FontWeight.bold// Highlight selected
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+
+                    );
+                  },
+                ),
+              ),
+            ),
+
 
             // Coffee Grid View
             SliverPadding(

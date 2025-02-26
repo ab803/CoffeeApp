@@ -21,6 +21,14 @@ class _CartState extends State<Cart> {
       widget.cartItems[index]['quantity'] += change;
       if (widget.cartItems[index]['quantity'] <= 0) {
         widget.cartItems.removeAt(index);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            closeIconColor: Color(0xFFC67C4E),
+            backgroundColor: Color(0xff313131),
+            content: Text("Item removed from cart"),
+            duration: Duration(seconds: 2), // Controls how long it stays visible
+          ),
+        );
       }
     });
   }
@@ -28,6 +36,14 @@ class _CartState extends State<Cart> {
   void removeFromCart(String title) {
     setState(() {
       widget.cartItems.removeWhere((item) => item['title'] == title);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          closeIconColor: Color(0xFFC67C4E),
+          backgroundColor: Color(0xff313131),
+          content: Text("Item removed from cart"),
+          duration: Duration(seconds: 2), // Controls how long it stays visible
+        ),
+      );
     });
   }
 
