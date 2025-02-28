@@ -93,7 +93,12 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email, color: Color(0xFFC67C4E)),
                           labelText: "Enter Your Email",
+                            labelStyle: TextStyle(color: Color(0xff313131)),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(color: Color(0xff313131), width: 2),
+                            ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Color(0xFFC67C4E), width: 2.5),
@@ -117,7 +122,12 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock, color: Color(0xFFC67C4E)),
                           labelText: "Enter the Password",
+                          labelStyle: TextStyle(color: Color(0xff313131)),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(color: Color(0xff313131), width: 2),
+                            ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Color(0xFFC67C4E), width: 2.5),
@@ -154,10 +164,16 @@ class _SignUpState extends State<SignUp> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock, color: Color(0xFFC67C4E)),
                           labelText: "Confirm the Password",
+                          labelStyle: TextStyle(color: Color(0xff313131)),
+
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Color(0xFFC67C4E), width: 2.5),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide(color: Color(0xff313131), width: 2),
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(

@@ -96,11 +96,11 @@ class _SigninState extends State<Signin> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.email, color: Color(0xFFC67C4E)),
                           labelText: "Enter Your Email",
-                          labelStyle: TextStyle(color: Color(0xFFC67C4E)),
+                          labelStyle: TextStyle(color: Color(0xff313131)),
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide(color: Color(0xFFC67C4E), width: 2),
+                            borderSide: BorderSide(color: Color(0xff313131), width: 2),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -125,8 +125,8 @@ class _SigninState extends State<Signin> {
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.password, color: Color(0xFFC67C4E)),
                           labelText: "Enter the Password",
-                          labelStyle: TextStyle(color: Color(0xff313131)),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                            labelStyle: TextStyle(color: Color(0xff313131)),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide(color: Color(0xff313131), width: 2),
