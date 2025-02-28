@@ -25,9 +25,18 @@ class header extends StatelessWidget{
                   fontSize: 13,
                 ),
               ),
-              CircleAvatar(
-                radius: 15, // Half of width & height
-                backgroundImage: AssetImage("assets/images/1726837197476.jpg"),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Color(0xffF9F2ED), // Border color
+                    width: 2.0, // Border thickness
+                  )
+                ),
+                child: CircleAvatar(
+                  radius: 15, // Half of width & height
+                  backgroundImage: AssetImage("assets/images/1726837197476.jpg"),
+                ),
               ),
             ],
           ),

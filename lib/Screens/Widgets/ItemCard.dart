@@ -110,7 +110,7 @@ class ItemCard extends StatelessWidget {
                 ),
                 child: IconButton(
                   onPressed: onAdd, // Call function when clicked
-                  icon: Icon(Icons.add, size: 20, color: Colors.white),
+                  icon: Icon(Icons.add, size: 20, color: Color(0xffF9F2ED)),
                 ),
               ),
             ],

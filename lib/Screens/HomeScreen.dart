@@ -1,5 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:task2/Screens/FavouriteScreen.dart';
+import 'package:task2/Screens/SignIn.dart';
+import 'Cart.dart';
 import 'Widgets/BottomNavigationBar.dart';
 import 'Widgets/ItemCard.dart';
 import 'Widgets/header.dart';
@@ -70,18 +74,48 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
               Padding(
                 padding: const EdgeInsets.only(left: 21,top: 35),
-                child: CircleAvatar(
-                radius: 15, // Half of width & height
-                backgroundImage: AssetImage("assets/images/1726837197476.jpg")
-                ,),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Color(0xffF9F2ED), // Border color
+                        width: 2.0, // Border thickness
+                      )
+                  ),
+                  child: CircleAvatar(
+                    radius: 15, // Half of width & height
+                    backgroundImage: AssetImage("assets/images/1726837197476.jpg"),
+                  ),
+                ),
               ),
                 SizedBox(height: 20),
-                _buildDrawerItem(Icons.home, "Home",color: Color(0xff313131)),
-                _buildDrawerItem(Icons.shopping_cart, "Cart",color: Color(0xff313131)),
-                _buildDrawerItem(Icons.favorite, "Favorites",color: Color(0xff313131)),
-                _buildDrawerItem(Icons.settings, "Settings",color: Color(0xff313131)),
+                _buildDrawerItem(Icons.home, "Home", color: Color(0xff313131), onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                }),
+                _buildDrawerItem(Icons.shopping_cart, "Cart", color: Color(0xff313131), onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Cart(cartItems: [],)));
+                }),
+                _buildDrawerItem(Icons.favorite, "Favorites", color: Color(0xff313131), onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Favouritescreen()));
+                }),
+
                 Divider(color: Color(0xff313131), thickness: 1, indent: 20, endIndent: 20),
-                _buildDrawerItem(Icons.logout, "Logout", color: Color(0xff313131)),
+                _buildDrawerItem(Icons.logout, "Logout", color: Color(0xff313131), onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Signin())); // Navigate to SignIn Page
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Sign out Successful!"),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating, // Makes it float
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Adds rounded corners
+                      ),
+                      backgroundColor: Color(0xFFC67C4E), // Change background color
+                      elevation: 6.0, // Adds shadow
+                    ),
+                  );
+                }),
 
               ],
             ),
@@ -178,18 +212,21 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 
-Widget _buildDrawerItem(IconData icon, String title, {Color ?color}) {
+Widget _buildDrawerItem(IconData icon, String title, {Color ?color, VoidCallback? onTap}) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-    child: Row(
-      children: [
-        Icon(icon, color: color, size: 24),
-        SizedBox(width: 15),
-        Text(
-          title,
-          style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
-        ),
-      ],
+    child: GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 24),
+          SizedBox(width: 15),
+          Text(
+            title,
+            style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
     ),
   );
 }
